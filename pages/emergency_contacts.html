@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergency Contacts — MediGuide 2026</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    /* ── Page specific ─────────────────────────────── */
+    .contacts-page { max-width: 800px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    .page-header { margin-bottom: 32px; }
+    .page-header .back-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      color: var(--text-2); font-size: 14px; text-decoration: none;
+      padding: 6px 0; transition: color .2s;
+    }
+    .page-header .back-btn:hover { color: var(--teal); }
+    .page-header h1 {
+      font-family: var(--font-brand); font-size: 28px; font-weight: 800;
+      color: var(--text-1); margin-top: 12px;
+    }
+    .page-header p { color: var(--text-2); font-size: 14px; margin-top: 4px; }
+
+    /* Alert Status Banner */
+    .alert-status {
+      background: var(--surface-1);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-lg);
+      padding: 20px 24px;
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 28px;
+      position: relative; overflow: hidden;
+    }
+    .alert-status::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--teal);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .6s ease;
+    }
+    .alert-status.sending::before { transform: scaleX(1); }
+    .alert-status.sent::before { background: #22c55e; transform: scaleX(1); }
+    .alert-status-icon { font-size: 28px; }
+    .alert-status-text h3 { font-size: 15px; font-weight: 700; color: var(--text-1); }
+    .alert-status-text p  { font-size: 13px; color: var(--text-2); margin-top: 2px; }
+    .alert-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--teal); margin-left: auto; flex-shrink: 0; }
+    .alert-dot.pulse { animation: pulse-ring 1.4s infinite; }
+    @keyframes pulse-ring {
+      0%   { box-shadow: 0 0 0 0 rgba(0,201,177,.6); }
+      70%  { box-shadow: 0 0 0 8px rgba(0,201,177,0); }
+      100% { box-shadow: 0 0 0 0 rgba(0,201,177,0); }
+    }
+
+    /* Send Alert CTA */
+    .send-alert-btn {
+      width: 100%; padding: 18px 24px; border-radius: var(--r-lg);
+      background: linear-gradient(135deg, var(--coral) 0%, #c0392b 100%);
+      color: white; font-size: 16px; font-weight: 700; font-family: var(--font-body);
+      border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+      transition: transform .15s, box-shadow .15s; box-shadow: var(--shadow-coral);
+      margin-bottom: 28px;
+    }
+    .send-alert-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,71,87,.45); }
+    .send-alert-btn:active { transform: translateY(0); }
+    .send-alert-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+    /* Contacts Grid */
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--text-3); margin-bottom: 12px;
+    }
+    .contacts-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+
+    .contact-card {
+      background: var(--surface-1);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-md);
+      padding: 16px 20px;
+      display: flex; align-items: center; gap: 16px;
+      transition: border-color .2s, background .2s;
+      position: relative; overflow: hidden;
+    }
+    .contact-card.notified {
+      border-color: rgba(34,197,94,.4);
+      background: rgba(34,197,94,.05);
+    }
+    .contact-card.notified::after {
+      content: '✓ Notified';
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      font-size: 12px; font-weight: 700; color: #22c55e;
+      background: rgba(34,197,94,.15); padding: 3px 10px; border-radius: 20px;
+    }
+    .contact-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px; font-weight: 800; color: white; flex-shrink: 0;
+    }
+    .contact-info h4 { font-size: 15px; font-weight: 700; color: var(--text-1); }
+    .contact-info p  { font-size: 13px; color: var(--text-2); margin-top: 2px; }
+    .contact-info .contact-phone { color: var(--teal); font-size: 13px; margin-top: 4px; }
+    .contact-actions { margin-left: auto; display: flex; gap: 8px; flex-shrink: 0; }
+    .contact-actions button {
+      width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--glass-border);
+      background: var(--surface-2); color: var(--text-2); cursor: pointer;
+      display: flex; align-items: center; justify-content: center; font-size: 14px;
+      transition: background .2s, color .2s;
+    }
+    .contact-actions button:hover { background: var(--surface-3); color: var(--text-1); }
+
+    /* Add Contact Form */
+    .add-contact-section {
+      background: var(--surface-1);
+      border: 1px solid var(--glass-border);
+      border-radius: var(--r-lg); padding: 24px;
+      margin-bottom: 28px;
+    }
+    .add-contact-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .form-field { display: flex; flex-direction: column; gap: 6px; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label { font-size: 12px; font-weight: 600; color: var(--text-2); text-transform: uppercase; letter-spacing: .8px; }
+    .form-field input, .form-field select {
+      padding: 10px 14px; border-radius: var(--r-sm);
+      background: var(--surface-2); border: 1px solid var(--glass-border);
+      color: var(--text-1); font-size: 14px; font-family: var(--font-body);
+      outline: none; transition: border-color .2s;
+    }
+    .form-field input:focus, .form-field select:focus { border-color: var(--teal); }
+    .form-field select option { background: var(--surface-2); }
+    .add-btn {
+      margin-top: 16px; padding: 12px 24px; border-radius: var(--r-sm);
+      background: var(--teal); color: var(--navy); font-size: 14px; font-weight: 700;
+      font-family: var(--font-body); border: none; cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .add-btn:hover { background: var(--teal-dim); transform: translateY(-1px); }
+
+    /* Message template */
+    .message-template {
+      background: var(--surface-1); border: 1px solid var(--glass-border);
+      border-radius: var(--r-lg); padding: 24px;
+    }
+    .message-template h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+    .template-preview {
+      background: var(--surface-2); border-radius: var(--r-md); padding: 16px;
+      font-size: 13px; color: var(--text-2); line-height: 1.7;
+      border-left: 3px solid var(--coral); margin-bottom: 16px;
+    }
+    .template-preview strong { color: var(--text-1); }
+    .template-options { display: flex; gap: 8px; flex-wrap: wrap; }
+    .template-pill {
+      padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+      background: var(--surface-2); border: 1px solid var(--glass-border);
+      color: var(--text-2); cursor: pointer; transition: all .2s;
+    }
+    .template-pill.active, .template-pill:hover {
+      background: var(--teal-glow); border-color: var(--teal); color: var(--teal);
+    }
+
+    /* Alert log */
+    .alert-log { margin-top: 28px; }
+    .log-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 12px 0; border-bottom: 1px solid var(--glass-border);
+      font-size: 13px;
+    }
+    .log-item:last-child { border-bottom: none; }
+    .log-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+    .log-text { color: var(--text-2); flex: 1; }
+    .log-text strong { color: var(--text-1); }
+    .log-time { color: var(--text-3); font-size: 11px; }
+
+    @media (max-width: 600px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .contact-card.notified::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">
+      <img src="../images/Screenshot_2026-03-21_225656-removebg-preview.png" width="130" height="50">
+    </a>
+    <div class="nav-pill">
+      <a href="../index.html" data-screen="home">Home</a>
+      <a href="../index.html" data-screen="emergency">Emergency</a>
+      <a href="../index.html" data-screen="hospitals">Hospitals</a>
+      <a href="../pages/doctor-booking.html">Book Doctor</a>
+      <a href="../pages/hospital-map.html">Map</a>
+      <a href="../index.html" data-screen="guides">Guides</a>
+    </div>
+    <div class="nav-status">
+      <span class="dot-live"></span>
+      <span class="text-sm" style="color:var(--text-2);">System Active</span>
+    </div>
+  </nav>
+
+  <div class="contacts-page">
+    <div class="page-header">
+      <a href="../index.html" class="back-btn">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+        Back to Home
+      </a>
+      <h1>🚨 Emergency Contact Alerts</h1>
+      <p>Instantly notify your emergency contacts with your location and situation</p>
+    </div>
+
+    <!-- Status Banner -->
+    <div class="alert-status" id="alert-status">
+      <div class="alert-status-icon">📡</div>
+      <div class="alert-status-text">
+        <h3 id="alert-status-title">Ready to Alert</h3>
+        <p id="alert-status-desc">Press the button below to send alerts to all contacts simultaneously</p>
+      </div>
+      <div class="alert-dot pulse" id="alert-dot"></div>
+    </div>
+
+    <!-- Big Send Button -->
+    <button class="send-alert-btn" id="send-all-btn" onclick="sendAllAlerts()">
+      🚨 Send Emergency Alert to All Contacts
+    </button>
+
+    <!-- Contacts List -->
+    <div class="section-label">Emergency Contacts (<span id="contact-count">0</span>)</div>
+    <div class="contacts-list" id="contacts-list"></div>
+
+    <!-- Add Contact -->
+    <div class="add-contact-section">
+      <h3>➕ Add Emergency Contact</h3>
+      <div class="form-grid">
+        <div class="form-field">
+          <label>Full Name</label>
+          <input type="text" id="new-name" placeholder="e.g. Sokha Doeun" />
+        </div>
+        <div class="form-field">
+          <label>Relationship</label>
+          <select id="new-relation">
+            <option value="Spouse">Spouse / Partner</option>
+            <option value="Parent">Parent</option>
+            <option value="Child">Child</option>
+            <option value="Sibling">Sibling</option>
+            <option value="Friend">Close Friend</option>
+            <option value="Doctor">Doctor</option>
+            <option value="Caregiver">Caregiver</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label>Phone Number</label>
+          <input type="tel" id="new-phone" placeholder="+855 12 345 678" />
+        </div>
+        <div class="form-field">
+          <label>Priority</label>
+          <select id="new-priority">
+            <option value="1">1 — First to notify</option>
+            <option value="2">2 — Second to notify</option>
+            <option value="3">3 — Third to notify</option>
+          </select>
+        </div>
+      </div>
+      <button class="add-btn" onclick="addContact()">Add Contact</button>
+    </div>
+
+    <!-- Message Template -->
+    <div class="message-template">
+      <h3>📩 Alert Message Template</h3>
+      <div class="template-preview" id="template-preview">
+        🚨 <strong>EMERGENCY ALERT</strong> from MediGuide<br><br>
+        <strong id="tpl-name">[Your Name]</strong> is experiencing a medical emergency.<br>
+        Situation: <strong id="tpl-situation">Medical Emergency</strong><br>
+        📍 Location: <strong id="tpl-location">Getting GPS...</strong><br><br>
+        Please call or come immediately. This alert was sent automatically via MediGuide.
+      </div>
+      <div class="section-label" style="margin-bottom:8px;">Situation Type</div>
+      <div class="template-options">
+        <div class="template-pill active" onclick="selectSituation(this,'Medical Emergency')">Medical Emergency</div>
+        <div class="template-pill" onclick="selectSituation(this,'Cardiac Event')">Cardiac Event</div>
+        <div class="template-pill" onclick="selectSituation(this,'Accident / Injury')">Accident / Injury</div>
+        <div class="template-pill" onclick="selectSituation(this,'Stroke Symptoms')">Stroke Symptoms</div>
+        <div class="template-pill" onclick="selectSituation(this,'Severe Bleeding')">Severe Bleeding</div>
+        <div class="template-pill" onclick="selectSituation(this,'Choking')">Choking</div>
+        <div class="template-pill" onclick="selectSituation(this,'Unconscious / Unresponsive')">Unconscious</div>
+      </div>
+
+      <!-- Alert Log -->
+      <div class="alert-log">
+        <div class="section-label">Recent Alerts</div>
+        <div id="alert-log-list">
+          <div class="log-item">
+            <span class="log-icon">ℹ️</span>
+            <span class="log-text">No alerts sent yet in this session</span>
+            <span class="log-time">Now</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ── State ── */
+let contacts = [
+  { id: 1, name: 'Sokha Doeun',     relation: 'Spouse',       phone: '+855 12 345 678', priority: 1, color: '#00c9b1' },
+  { id: 2, name: 'Dr. Vichet Chan', relation: 'Cardiologist', phone: '+855 23 456 789', priority: 2, color: '#3d9be9' },
+  { id: 3, name: 'Dara Doeun',      relation: 'Sibling',      phone: '+855 17 890 123', priority: 3, color: '#f5a623' }
+];
+let selectedSituation = 'Medical Emergency';
+let userLocation = null;
+let alertLog = [];
+
+/* ── Init ── */
+function init() {
+  renderContacts();
+  getLocation();
+  updateTemplate();
+}
+
+/* ── Geolocation ── */
+function getLocation() {
+  if (!navigator.geolocation) {
+    document.getElementById('tpl-location').textContent = 'Phnom Penh, Cambodia (GPS unavailable)';
+    userLocation = { lat: 11.5564, lng: 104.9282, label: 'Phnom Penh, Cambodia' };
+    return;
+  }
+  navigator.geolocation.getCurrentPosition(
+    pos => {
+      const { latitude: lat, longitude: lng } = pos.coords;
+      userLocation = { lat, lng, label: `${lat.toFixed(5)}, ${lng.toFixed(5)}` };
+      document.getElementById('tpl-location').textContent = `${lat.toFixed(5)}, ${lng.toFixed(5)} — Tap to open maps`;
+    },
+    () => {
+      document.getElementById('tpl-location').textContent = 'Phnom Penh, Cambodia (approximate)';
+      userLocation = { lat: 11.5564, lng: 104.9282, label: 'Phnom Penh, Cambodia' };
+    },
+    { timeout: 6000 }
+  );
+}
+
+/* ── Render Contacts ── */
+function renderContacts() {
+  const list = document.getElementById('contacts-list');
+  document.getElementById('contact-count').textContent = contacts.length;
+
+  list.innerHTML = contacts.map(c => `
+    <div class="contact-card" id="card-${c.id}">
+      <div class="contact-avatar" style="background:${c.color}">
+        ${c.name.split(' ').map(n=>n[0]).join('').slice(0,2)}
+      </div>
+      <div class="contact-info">
+        <h4>${c.name}</h4>
+        <p>${c.relation} · Priority ${c.priority}</p>
+        <p class="contact-phone">${c.phone}</p>
+      </div>
+      <div class="contact-actions">
+        <button onclick="sendSingleAlert(${c.id})" title="Send Alert">🚨</button>
+        <button onclick="callContact('${c.phone}')" title="Call">📞</button>
+        <button onclick="removeContact(${c.id})" title="Remove">🗑</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+/* ── Send All Alerts ── */
+function sendAllAlerts() {
+  const btn = document.getElementById('send-all-btn');
+  const status = document.getElementById('alert-status');
+  const dot = document.getElementById('alert-dot');
+  btn.disabled = true;
+  btn.textContent = '📡 Sending alerts...';
+
+  status.className = 'alert-status sending';
+  document.getElementById('alert-status-title').textContent = 'Sending Alerts...';
+  document.getElementById('alert-status-desc').textContent = `Notifying ${contacts.length} contacts with your location`;
+  dot.className = 'alert-dot pulse';
+
+  let delay = 0;
+  contacts.forEach(c => {
+    delay += 700;
+    setTimeout(() => {
+      const card = document.getElementById('card-' + c.id);
+      if (card) card.classList.add('notified');
+      addLog(`Alert sent to ${c.name} (${c.relation})`, '✅');
+    }, delay);
+  });
+
+  setTimeout(() => {
+    status.className = 'alert-status sent';
+    document.getElementById('alert-status-title').textContent = '✅ All Contacts Notified';
+    document.getElementById('alert-status-desc').textContent = `${contacts.length} contacts alerted · GPS location shared`;
+    dot.className = 'alert-dot';
+    btn.disabled = false;
+    btn.textContent = '🚨 Send Emergency Alert to All Contacts';
+    addLog('Emergency alert broadcast complete', '🚨');
+  }, delay + 800);
+}
+
+/* ── Send Single Alert ── */
+function sendSingleAlert(id) {
+  const c = contacts.find(x => x.id === id);
+  if (!c) return;
+  const card = document.getElementById('card-' + id);
+  if (card) card.classList.add('notified');
+  addLog(`Alert sent to ${c.name}`, '✅');
+}
+
+/* ── Call Contact ── */
+function callContact(phone) {
+  window.location.href = 'tel:' + phone.replace(/\s/g,'');
+}
+
+/* ── Remove Contact ── */
+function removeContact(id) {
+  if (!confirm('Remove this contact?')) return;
+  contacts = contacts.filter(c => c.id !== id);
+  renderContacts();
+}
+
+/* ── Add Contact ── */
+function addContact() {
+  const name     = document.getElementById('new-name').value.trim();
+  const relation = document.getElementById('new-relation').value;
+  const phone    = document.getElementById('new-phone').value.trim();
+  const priority = parseInt(document.getElementById('new-priority').value);
+
+  if (!name || !phone) { alert('Please enter name and phone number'); return; }
+
+  const colors = ['#00c9b1','#3d9be9','#f5a623','#ff4757','#a78bfa','#34d399'];
+  const newId = Date.now();
+  contacts.push({ id: newId, name, relation, phone, priority, color: colors[contacts.length % colors.length] });
+  contacts.sort((a,b) => a.priority - b.priority);
+
+  document.getElementById('new-name').value  = '';
+  document.getElementById('new-phone').value = '';
+  renderContacts();
+  addLog(`${name} added as emergency contact`, '➕');
+}
+
+/* ── Select Situation ── */
+function selectSituation(el, situation) {
+  document.querySelectorAll('.template-pill').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  selectedSituation = situation;
+  document.getElementById('tpl-situation').textContent = situation;
+}
+
+/* ── Update Template ── */
+function updateTemplate() {
+  document.getElementById('tpl-name').textContent = 'John Doeun';
+}
+
+/* ── Add Log Entry ── */
+function addLog(text, icon = '📋') {
+  const logList = document.getElementById('alert-log-list');
+  const now = new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+  alertLog.unshift({ text, icon, time: now });
+
+  logList.innerHTML = alertLog.slice(0,5).map(l => `
+    <div class="log-item">
+      <span class="log-icon">${l.icon}</span>
+      <span class="log-text">${l.text}</span>
+      <span class="log-time">${l.time}</span>
+    </div>
+  `).join('');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>

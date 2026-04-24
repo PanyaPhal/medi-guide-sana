@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MediGuide 2026 — Survey</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+<div class="page">
+
+  <nav class="nav">
+    <a href="../index.html" class="nav-logo">
+      <img src = "../images/Screenshot_2026-03-21_225656-removebg-preview.png" width = 130 height = 50>
+    </a>
+    <div class="nav-pill">
+      <a href="../index.html">Home</a>
+      <a href="survey.html" class="active">Survey</a>
+      <a href="profile.html">Profile</a>
+    </div>
+    <span class="badge badge-teal">2026</span>
+  </nav>
+
+  <div class="inner-wrap">
+
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:40px;">
+      <div class="hero-eyebrow" style="display:inline-flex;margin-bottom:16px;">📋 User Experience Survey</div>
+      <h1 style="font-family:var(--font-brand);font-size:clamp(1.8rem,4vw,2.6rem);color:var(--text-1);letter-spacing:2px;margin-bottom:10px;">
+        MEDI<em style="color:var(--teal);font-style:normal;">GUIDE</em> 2026
+      </h1>
+      <p style="color:var(--text-2);font-size:14px;max-width:460px;margin:0 auto;line-height:1.75;">
+        Help shape the future of emergency AI. Your honest feedback makes MediGuide better for everyone.
+      </p>
+    </div>
+
+    <form id="survey-form" novalidate>
+
+      <!-- Section 1 -->
+      <div class="survey-card">
+        <div class="survey-section-title">🧑 Section 1 — Personal Information</div>
+
+        <div class="grid-2" style="gap:16px;">
+          <div class="form-group">
+            <label class="form-label" for="first-name">First Name *</label>
+            <input class="form-input" id="first-name" name="first_name" type="text" placeholder="e.g. Sokha" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="last-name">Last Name *</label>
+            <input class="form-input" id="last-name" name="last_name" type="text" placeholder="e.g. Doeun" required />
+          </div>
+        </div>
+        <div class="grid-2" style="gap:16px;">
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" id="email" name="email" type="email" placeholder="you@example.com" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="phone">Phone</label>
+            <input class="form-input" id="phone" name="phone" type="tel" placeholder="+855 12 345 678" />
+          </div>
+        </div>
+        <div class="grid-2" style="gap:16px;">
+          <div class="form-group">
+            <label class="form-label" for="age-group">Age Group *</label>
+            <select class="form-select" id="age-group" name="age_group" required>
+              <option value="">Select range</option>
+              <option>Under 18</option><option>18–25</option><option>26–35</option>
+              <option>36–50</option><option>51–65</option><option>65+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="country">Country</label>
+            <select class="form-select" id="country" name="country">
+              <option value="">Select country</option>
+              <option value="kh" selected>Cambodia</option>
+              <option value="th">Thailand</option><option value="vn">Vietnam</option>
+              <option value="my">Malaysia</option><option value="sg">Singapore</option>
+              <option value="ph">Philippines</option><option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Occupation</label>
+          <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;">
+            <label class="option-item"><input type="radio" name="occupation" value="healthcare" /><label>Healthcare Worker</label></label>
+            <label class="option-item"><input type="radio" name="occupation" value="general" /><label>General Public</label></label>
+            <label class="option-item"><input type="radio" name="occupation" value="student" /><label>Student</label></label>
+            <label class="option-item"><input type="radio" name="occupation" value="other" /><label>Other</label></label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section 2 -->
+      <div class="survey-card">
+        <div class="survey-section-title">🤖 Section 2 — App Experience</div>
+
+        <div class="form-group">
+          <label class="form-label">Used a medical emergency app before?</label>
+          <label class="option-item"><input type="radio" name="prior_use" value="yes"/><label>Yes, I have</label></label>
+          <label class="option-item"><input type="radio" name="prior_use" value="no"/><label>No, first time</label></label>
+          <label class="option-item"><input type="radio" name="prior_use" value="familiar"/><label>Familiar but not used one</label></label>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">How easy was MediGuide to navigate?</label>
+          <div class="star-group">
+            <input type="hidden" name="ease_rating" value="0" />
+            <span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">How useful was the voice-guided emergency feature?</label>
+          <div class="star-group">
+            <input type="hidden" name="voice_rating" value="0" />
+            <span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Most useful features (select all)</label>
+          <label class="option-item"><input type="checkbox" name="feature_cpr"       /><label>CPR / Emergency Step-by-Step Guide</label></label>
+          <label class="option-item"><input type="checkbox" name="feature_hospitals" /><label>Hospital Finder & Google Maps</label></label>
+          <label class="option-item"><input type="checkbox" name="feature_contacts"  /><label>Family Alert & Location Sharing</label></label>
+          <label class="option-item"><input type="checkbox" name="feature_offline"   /><label>Offline Mode</label></label>
+          <label class="option-item"><input type="checkbox" name="feature_profile"   /><label>Medical Profile Storage</label></label>
+          <label class="option-item"><input type="checkbox" name="feature_voice"     /><label>Voice Detection ("Hey Medi!")</label></label>
+        </div>
+      </div>
+
+      <!-- Section 3 -->
+      <div class="survey-card">
+        <div class="survey-section-title">⭐ Section 3 — Overall Satisfaction</div>
+
+        <div class="form-group">
+          <label class="form-label">Overall rating</label>
+          <div class="star-group">
+            <input type="hidden" name="overall_rating" value="0" />
+            <span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span><span class="star">⭐</span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Would you recommend MediGuide?</label>
+          <label class="option-item"><input type="radio" name="recommend" value="definitely"/><label>Definitely yes</label></label>
+          <label class="option-item"><input type="radio" name="recommend" value="probably"  /><label>Probably yes</label></label>
+          <label class="option-item"><input type="radio" name="recommend" value="unsure"    /><label>Not sure</label></label>
+          <label class="option-item"><input type="radio" name="recommend" value="no"        /><label>Probably not</label></label>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="improvement">What could we improve?</label>
+          <textarea class="form-textarea" id="improvement" name="improvement" placeholder="Share your suggestions — every response is read..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="testimonial">Any testimonials or comments?</label>
+          <textarea class="form-textarea" id="testimonial" name="testimonial" placeholder="Tell us about your experience with MediGuide..."></textarea>
+        </div>
+
+        <div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:24px;padding:14px 16px;background:var(--surface-2);border-radius:var(--r-md);border:1px solid var(--glass-border);">
+          <input type="checkbox" id="consent" name="consent" value="yes" style="margin-top:3px;accent-color:var(--teal);width:15px;height:15px;flex-shrink:0;" required />
+          <label for="consent" style="font-size:13px;color:var(--text-2);line-height:1.65;cursor:pointer;">
+            I consent to MediGuide storing my responses for research and product improvement. My data will not be shared with third parties.
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-teal btn-full btn-lg">Submit Survey →</button>
+      </div>
+
+    </form>
+
+    <div id="form-confirm" class="form-confirm hidden">
+      <div class="confirm-icon">✅</div>
+      <h3 style="color:var(--teal);margin-bottom:8px;font-family:var(--font-brand);">Thank you!</h3>
+      <p style="color:var(--text-2);font-size:14px;">Your feedback has been recorded. MediGuide is better because of you.</p>
+    </div>
+
+  </div>
+
+  <footer>
+    <strong>MEDI·GUIDE</strong> 2026 &nbsp;·&nbsp; AI Emergency Assistant &nbsp;·&nbsp; Medically Certified
+  </footer>
+</div>
+<script src="../js/app.js"></script>
+</body>
+</html>

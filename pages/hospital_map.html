@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_20d872a510dffef9abd19888128ef9ea {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_20d872a510dffef9abd19888128ef9ea" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_20d872a510dffef9abd19888128ef9ea = L.map(
+                "map_20d872a510dffef9abd19888128ef9ea",
+                {
+                    center: [11.5564, 104.9282],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 14,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_65d324aaa85e4171a1e86da3a74383d1 = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_65d324aaa85e4171a1e86da3a74383d1.addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            var circle_marker_4b29c2a3fbf0cabb7aa2c23b6942f550 = L.circleMarker(
+                [11.5564, 104.9282],
+                {"bubblingMouseEvents": true, "color": "#00c9b1", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00c9b1", "fillOpacity": 0.9, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 10, "stroke": true, "weight": 3}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            circle_marker_4b29c2a3fbf0cabb7aa2c23b6942f550.bindTooltip(
+                `<div>
+                     📍 Your Location
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var circle_b39cdf34c342d3e2f074023fd75d637e = L.circle(
+                [11.5564, 104.9282],
+                {"bubblingMouseEvents": true, "color": "#00c9b1", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00c9b1", "fillOpacity": 0.08, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 1000, "stroke": true, "weight": 1}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            var circle_568e252f9153f7035eee2a32da0d42f4 = L.circle(
+                [11.5564, 104.9282],
+                {"bubblingMouseEvents": true, "color": "#00c9b1", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00c9b1", "fillOpacity": 0.06, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 2000, "stroke": true, "weight": 1}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            var circle_6af5e495aa437c1d60b7427583918d7c = L.circle(
+                [11.5564, 104.9282],
+                {"bubblingMouseEvents": true, "color": "#00c9b1", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "#00c9b1", "fillOpacity": 0.04, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 5000, "stroke": true, "weight": 1}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            var marker_21d3ecc9f7cc8b68da1366152efe1252 = L.marker(
+                [11.5638, 104.9238],
+                {
+}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            var icon_054a226039f2052623dae16691712a3d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "plus-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_55afac71def2c8fe194a4e3fcb95a2da = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_15d58aaa5a84ab19fd5a84f698dee335 = $(`<div id="html_15d58aaa5a84ab19fd5a84f698dee335" style="width: 100.0%; height: 100.0%;">         <div style="font-family:sans-serif;min-width:180px;">           <b style="color:#00c9b1;">★ #1 Calmette Hospital</b><br>           <small>Monivong Blvd, Phnom Penh</small><br><hr style="margin:6px 0;">           🕐 0.95 km &nbsp;·&nbsp; ~2 min<br>           📊 Load: 65%  |  ER beds: 30<br>           ⭐ Score: 0.925<br>           📞 023 426 948<br><br>           <a href="https://www.google.com/maps/dir/11.5564,104.9282/Calmette+Hospital,+Phnom+Penh,+Cambodia"              target="_blank"              style="background:#00c9b1;color:#0b1e3d;padding:5px 10px;                     border-radius:6px;text-decoration:none;font-weight:bold;">             🗺 Directions           </a>         </div></div>`)[0];
+                popup_55afac71def2c8fe194a4e3fcb95a2da.setContent(html_15d58aaa5a84ab19fd5a84f698dee335);
+            
+        
+
+        marker_21d3ecc9f7cc8b68da1366152efe1252.bindPopup(popup_55afac71def2c8fe194a4e3fcb95a2da)
+        ;
+
+        
+    
+    
+            marker_21d3ecc9f7cc8b68da1366152efe1252.bindTooltip(
+                `<div>
+                     ★ #1 Calmette Hospital  (0.95 km)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_21d3ecc9f7cc8b68da1366152efe1252.setIcon(icon_054a226039f2052623dae16691712a3d);
+            
+    
+            var poly_line_d1c5b4db869e845297f792112e411077 = L.polyline(
+                [[11.5564, 104.9282], [11.5638, 104.9238]],
+                {"bubblingMouseEvents": true, "color": "#00c9b1", "dashArray": "6 4", "dashOffset": null, "fill": false, "fillColor": "#00c9b1", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            poly_line_d1c5b4db869e845297f792112e411077.bindTooltip(
+                `<div>
+                     0.95 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_371e9d9782dafa1413baf338e4fccbea = L.marker(
+                [11.5615, 104.9165],
+                {
+}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            var icon_28ff9a3ba01a4e730a76f19f155b746e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plus-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fe79b3b78400783e7d6a03b81ddbe839 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_bf7b59500d727ef407c48d310f17ef8d = $(`<div id="html_bf7b59500d727ef407c48d310f17ef8d" style="width: 100.0%; height: 100.0%;">         <div style="font-family:sans-serif;min-width:180px;">           <b style="color:#3d9be9;">★ #2 Kossamak Hospital</b><br>           <small>Monivong Blvd, Phnom Penh</small><br><hr style="margin:6px 0;">           🕐 1.4 km &nbsp;·&nbsp; ~3 min<br>           📊 Load: 45%  |  ER beds: 25<br>           ⭐ Score: 0.68<br>           📞 023 880 484<br><br>           <a href="https://www.google.com/maps/dir/11.5564,104.9282/Kossamak+Hospital,+Phnom+Penh,+Cambodia"              target="_blank"              style="background:#3d9be9;color:#0b1e3d;padding:5px 10px;                     border-radius:6px;text-decoration:none;font-weight:bold;">             🗺 Directions           </a>         </div></div>`)[0];
+                popup_fe79b3b78400783e7d6a03b81ddbe839.setContent(html_bf7b59500d727ef407c48d310f17ef8d);
+            
+        
+
+        marker_371e9d9782dafa1413baf338e4fccbea.bindPopup(popup_fe79b3b78400783e7d6a03b81ddbe839)
+        ;
+
+        
+    
+    
+            marker_371e9d9782dafa1413baf338e4fccbea.bindTooltip(
+                `<div>
+                     ★ #2 Kossamak Hospital  (1.4 km)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_371e9d9782dafa1413baf338e4fccbea.setIcon(icon_28ff9a3ba01a4e730a76f19f155b746e);
+            
+    
+            var poly_line_436fec69148c991a4d82c6bb763c994c = L.polyline(
+                [[11.5564, 104.9282], [11.5615, 104.9165]],
+                {"bubblingMouseEvents": true, "color": "#3d9be9", "dashArray": "6 4", "dashOffset": null, "fill": false, "fillColor": "#3d9be9", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            poly_line_436fec69148c991a4d82c6bb763c994c.bindTooltip(
+                `<div>
+                     1.4 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_e7426d9216aeaba430bea24243400590 = L.marker(
+                [11.5726, 104.916],
+                {
+}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            var icon_06d8add0a7308439e0111512b925820d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plus-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b81e45ce9d49b45459438bfbad5ea28d = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_872dcd37412fd8186f6689e29bfe60d7 = $(`<div id="html_872dcd37412fd8186f6689e29bfe60d7" style="width: 100.0%; height: 100.0%;">         <div style="font-family:sans-serif;min-width:180px;">           <b style="color:#3d9be9;">#3 Royal Phnom Penh Hospital</b><br>           <small>Russian Blvd, Phnom Penh</small><br><hr style="margin:6px 0;">           🕐 2.24 km &nbsp;·&nbsp; ~4 min<br>           📊 Load: 50%  |  ER beds: 20<br>           ⭐ Score: 0.626<br>           📞 023 991 000<br><br>           <a href="https://www.google.com/maps/dir/11.5564,104.9282/Royal+Phnom+Penh+Hospital,+Cambodia"              target="_blank"              style="background:#3d9be9;color:#0b1e3d;padding:5px 10px;                     border-radius:6px;text-decoration:none;font-weight:bold;">             🗺 Directions           </a>         </div></div>`)[0];
+                popup_b81e45ce9d49b45459438bfbad5ea28d.setContent(html_872dcd37412fd8186f6689e29bfe60d7);
+            
+        
+
+        marker_e7426d9216aeaba430bea24243400590.bindPopup(popup_b81e45ce9d49b45459438bfbad5ea28d)
+        ;
+
+        
+    
+    
+            marker_e7426d9216aeaba430bea24243400590.bindTooltip(
+                `<div>
+                     #3 Royal Phnom Penh Hospital  (2.24 km)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e7426d9216aeaba430bea24243400590.setIcon(icon_06d8add0a7308439e0111512b925820d);
+            
+    
+            var poly_line_15970bb7e47fe8485ad19ed83612b53f = L.polyline(
+                [[11.5564, 104.9282], [11.5726, 104.916]],
+                {"bubblingMouseEvents": true, "color": "#3d9be9", "dashArray": "6 4", "dashOffset": null, "fill": false, "fillColor": "#3d9be9", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            poly_line_15970bb7e47fe8485ad19ed83612b53f.bindTooltip(
+                `<div>
+                     2.24 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_d40f80ed06a7b5b8d04fc200ef2b4fc1 = L.marker(
+                [11.58, 104.91],
+                {
+}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            var icon_157d823c4d82417dbd474c002eaec9b6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "plus-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9b861dd3a2c489af507d43d4a9aa2cd8 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_9412829ceeb76d2936c5ff7efd7f46ab = $(`<div id="html_9412829ceeb76d2936c5ff7efd7f46ab" style="width: 100.0%; height: 100.0%;">         <div style="font-family:sans-serif;min-width:180px;">           <b style="color:#3d9be9;">#4 Khmer Soviet Friendship Hospital</b><br>           <small>Confederation de la Russie Blvd</small><br><hr style="margin:6px 0;">           🕐 3.29 km &nbsp;·&nbsp; ~7 min<br>           📊 Load: 55%  |  ER beds: 40<br>           ⭐ Score: 0.401<br>           📞 023 883 712<br><br>           <a href="https://www.google.com/maps/dir/11.5564,104.9282/Khmer+Soviet+Friendship+Hospital,+Phnom+Penh"              target="_blank"              style="background:#3d9be9;color:#0b1e3d;padding:5px 10px;                     border-radius:6px;text-decoration:none;font-weight:bold;">             🗺 Directions           </a>         </div></div>`)[0];
+                popup_9b861dd3a2c489af507d43d4a9aa2cd8.setContent(html_9412829ceeb76d2936c5ff7efd7f46ab);
+            
+        
+
+        marker_d40f80ed06a7b5b8d04fc200ef2b4fc1.bindPopup(popup_9b861dd3a2c489af507d43d4a9aa2cd8)
+        ;
+
+        
+    
+    
+            marker_d40f80ed06a7b5b8d04fc200ef2b4fc1.bindTooltip(
+                `<div>
+                     #4 Khmer Soviet Friendship Hospital  (3.29 km)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d40f80ed06a7b5b8d04fc200ef2b4fc1.setIcon(icon_157d823c4d82417dbd474c002eaec9b6);
+            
+    
+            var poly_line_1784d420d473edf1531b2f91cfa1717e = L.polyline(
+                [[11.5564, 104.9282], [11.58, 104.91]],
+                {"bubblingMouseEvents": true, "color": "#3d9be9", "dashArray": "6 4", "dashOffset": null, "fill": false, "fillColor": "#3d9be9", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            poly_line_1784d420d473edf1531b2f91cfa1717e.bindTooltip(
+                `<div>
+                     3.29 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_f495a56dc8cbfeadc483b2b99a96454a = L.marker(
+                [11.5549, 104.9282],
+                {
+}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            var icon_b5513d3dcb3825d304f46462d4f67e83 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "plus-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_465cf9e0282ef3073ca5c7ec24768907 = L.popup({
+  "maxWidth": 250,
+});
+
+        
+            
+                var html_200e9522ed7c50d76a617e15d5e6264a = $(`<div id="html_200e9522ed7c50d76a617e15d5e6264a" style="width: 100.0%; height: 100.0%;">         <div style="font-family:sans-serif;min-width:180px;">           <b style="color:#ff4757;">#5 Sunrise Japan Hospital</b><br>           <small>Mao Tse Tung Blvd, Phnom Penh</small><br><hr style="margin:6px 0;">           🕐 0.17 km &nbsp;·&nbsp; ~1 min<br>           📊 Load: 90%  |  ER beds: 15<br>           ⭐ Score: 0.323<br>           📞 023 999 111<br><br>           <a href="https://www.google.com/maps/dir/11.5564,104.9282/Sunrise+Japan+Hospital,+Phnom+Penh,+Cambodia"              target="_blank"              style="background:#ff4757;color:#0b1e3d;padding:5px 10px;                     border-radius:6px;text-decoration:none;font-weight:bold;">             🗺 Directions           </a>         </div></div>`)[0];
+                popup_465cf9e0282ef3073ca5c7ec24768907.setContent(html_200e9522ed7c50d76a617e15d5e6264a);
+            
+        
+
+        marker_f495a56dc8cbfeadc483b2b99a96454a.bindPopup(popup_465cf9e0282ef3073ca5c7ec24768907)
+        ;
+
+        
+    
+    
+            marker_f495a56dc8cbfeadc483b2b99a96454a.bindTooltip(
+                `<div>
+                     #5 Sunrise Japan Hospital  (0.17 km)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f495a56dc8cbfeadc483b2b99a96454a.setIcon(icon_b5513d3dcb3825d304f46462d4f67e83);
+            
+    
+            var poly_line_5c404739cf858ca483f218286d384ebd = L.polyline(
+                [[11.5564, 104.9282], [11.5549, 104.9282]],
+                {"bubblingMouseEvents": true, "color": "#ff4757", "dashArray": "6 4", "dashOffset": null, "fill": false, "fillColor": "#ff4757", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.5, "smoothFactor": 1.0, "stroke": true, "weight": 1.5}
+            ).addTo(map_20d872a510dffef9abd19888128ef9ea);
+        
+    
+            poly_line_5c404739cf858ca483f218286d384ebd.bindTooltip(
+                `<div>
+                     0.17 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+</script>
+</html>
